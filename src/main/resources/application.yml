@@ -1,7 +1,7 @@
 #指定项目的运行环境,可自动启用或停止某些功能
 spring:
   profiles:
-    active: dev
+    active: prod
 
 http:
     encoding:
@@ -18,7 +18,7 @@ server:
 
 #mybatis config
 mybatis:
-  type-aliases-package: com.icecmodal
+  type-aliases-package: com.icec.modal
 
 # 微信配置
 token: icec

@@ -2,12 +2,12 @@ package com.icec.controller;
 
 import com.github.pagehelper.PageHelper;
 import com.icec.modal.PhoneStock;
+import com.icec.modal.Result;
 import com.icec.service.impl.PhoneStockServiceImpl;
+import com.icec.util.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -35,18 +35,27 @@ import java.util.List;
  *
  */
 @RestController
-@RequestMapping("/user/phoneStock")
-@Api(value = "手机库存信息")
-public class PhoneStockController {
+@RequestMapping("/user/mobile-equipment-identity")
+@Api(value = "手机IMEI导入信息")
+public class MobileEquipmentIdentityController {
 
     @Resource
     private PhoneStockServiceImpl phoneStockService;
 
-    @ApiOperation(value="获取手机库存信息", notes="")
-    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ApiOperation(value="获取手机IMEI信息列表")
+    @GetMapping(value = "/list")
     public List<PhoneStock> list() {
         PageHelper.startPage(1,5);
         return phoneStockService.getAll();
     }
+
+
+    @ApiOperation(value = "删除手机", notes = "根据url删除手机IMEI")
+    @DeleteMapping(value = "/{id}")
+    public Result deletePhoneStock(@PathVariable Long id){
+        phoneStockService.delete(id);
+        return ResultUtils.success();
+    }
+
 
 }
