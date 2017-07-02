@@ -1,0 +1,18 @@
+datasource:
+   druid:
+      url: jdbc:mysql://139.224.181.142:3306/dxt?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false
+      username: root
+      password: abcd=1234
+      filters: stat,slf4j
+      initialSize: 10
+      maxActive: 100
+      maxWait: 60000
+      minIdle: 5
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxPoolPreparedStatementPerConnectionSize: 20
