@@ -42,13 +42,13 @@ public class UserController {
     private UserServiceImpl userService;
 
     @GetMapping(value = "/user/list")
-    public List<User> list() {
+    public Result<List> getList() {
         PageHelper.startPage(1, 3);
-        return userService.getAll();
+        return ResultUtils.success(userService.getAll());
     }
 
     @PostMapping(value = "/user")
-    public Result add(@Valid User u, BindingResult bindingResult) {
+    public Result<User> postUser(@Valid User u, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -57,7 +57,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/user")
-    public Result<User> update(@Valid User u, BindingResult bindingResult) {
+    public Result<User> putUser(@Valid User u, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -66,7 +66,7 @@ public class UserController {
     }
 
     @DeleteMapping(value = "/user/{id}")
-    public Result delete(@PathVariable("id") Long id) {
+    public Result deleteUser(@PathVariable("id") Long id) {
         userService.delete(id);
         return ResultUtils.success();
     }
