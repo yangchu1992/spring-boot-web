@@ -33,6 +33,7 @@ import java.util.List;
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/admin")
 public class UserController {
