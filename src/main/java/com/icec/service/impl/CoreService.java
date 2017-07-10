@@ -1,7 +1,6 @@
 package com.icec.service.impl;
 
 import com.icec.modal.TextMessage;
-import com.icec.service.PhoneStockService;
 import com.icec.util.MessageUtil;
 import com.icec.util.XmlTool;
 import org.slf4j.Logger;
@@ -40,7 +39,7 @@ public class CoreService {
     protected Logger logger = LoggerFactory.getLogger(getClass());
 
     @Resource
-    private PhoneStockService phoneStockService;
+    private MobileEquipmentIdentityServiceImpl mobileEquipmentIdentityService;
 
     /**
      * 处理微信发来的请求
@@ -79,7 +78,7 @@ public class CoreService {
 
                 //自动回复
                 TextMessage text = new TextMessage();
-                text.setContent(phoneStockService.querySerialNumber(content));
+                text.setContent(mobileEquipmentIdentityService.querySerialNumber(content));
                 text.setToUserName(fromUserName);
                 text.setFromUserName(toUserName);
                 text.setCreateTime(new Date().getTime() + "");

@@ -1,9 +1,9 @@
 package com.icec.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.icec.modal.PhoneStock;
+import com.icec.modal.MobileEquipmentIdentity;
 import com.icec.modal.Result;
-import com.icec.service.impl.PhoneStockServiceImpl;
+import com.icec.service.impl.MobileEquipmentIdentityServiceImpl;
 import com.icec.util.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -40,20 +40,20 @@ import java.util.List;
 public class MobileEquipmentIdentityController {
 
     @Resource
-    private PhoneStockServiceImpl phoneStockService;
+    private MobileEquipmentIdentityServiceImpl mobileEquipmentIdentityService;
 
     @ApiOperation(value="获取手机IMEI信息列表")
     @GetMapping(value = "/list")
-    public List<PhoneStock> list() {
-        PageHelper.startPage(1,5);
-        return phoneStockService.getAll();
+    public List<MobileEquipmentIdentity> list(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "100") int pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        return mobileEquipmentIdentityService.getAll();
     }
 
 
     @ApiOperation(value = "删除手机", notes = "根据url删除手机IMEI")
     @DeleteMapping(value = "/{id}")
     public Result deletePhoneStock(@PathVariable Long id){
-        phoneStockService.delete(id);
+        mobileEquipmentIdentityService.delete(id);
         return ResultUtils.success();
     }
 

@@ -1,6 +1,6 @@
 package com.icec.service;
 
-import com.icec.modal.PhoneStock;
+import com.icec.modal.MobileEquipmentIdentity;
 
 import java.util.List;
 
@@ -24,17 +24,17 @@ import java.util.List;
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
  */
-public interface PhoneStockService {
+public interface MobileEquipmentIdentityService {
 
-    void insert(PhoneStock phoneStock);
+    void insert(MobileEquipmentIdentity entity);
 
-    List<PhoneStock> getAll();
+    List<MobileEquipmentIdentity> getAll();
 
-    PhoneStock find(Long id);
+    MobileEquipmentIdentity find(Long id);
 
-    PhoneStock findBySerialNumber(String serialNumber);
+    MobileEquipmentIdentity findBySerialNumber(String serialNumber);
 
-    void update(PhoneStock phoneStock);
+    void update(MobileEquipmentIdentity entity);
 
     void delete(Long id);
 

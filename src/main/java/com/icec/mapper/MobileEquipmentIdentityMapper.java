@@ -1,9 +1,8 @@
 package com.icec.mapper;
 
 import com.icec.enums.PhoneStockImportEnum;
-import com.icec.modal.PhoneStock;
+import com.icec.modal.MobileEquipmentIdentity;
 import org.apache.ibatis.annotations.*;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -30,32 +29,32 @@ import java.util.List;
  *
  */
 @Repository
-public interface PhoneStockMapper {
+public interface MobileEquipmentIdentityMapper {
 
     @Select("select * from phone_stock")
     @Results({
             @Result(property = "isImport", column = "import", javaType = PhoneStockImportEnum.class)
     })
-    List<PhoneStock> getAll();
+    List<MobileEquipmentIdentity> getAll();
 
     @Select("select * from phone_stock where id=#{id}")
     @Results({
              @Result(property = "isImport", column = "import", javaType = PhoneStockImportEnum.class)
     })
-    PhoneStock find(Long id);
+    MobileEquipmentIdentity find(Long id);
 
 
     @Select("select * from phone_stock where serialNumber=#{serialNumber}")
     @Results({
             @Result(property = "isImport", column = "import", javaType = PhoneStockImportEnum.class)
     })
-    PhoneStock findBySerialNumber(String serialNumber);
+    MobileEquipmentIdentity findBySerialNumber(String serialNumber);
 
     @Insert("insert into phone_stock(name, serialNumber, import, model) values (#{name}, #{serialNumber}, #{isImport}, #{model})")
-    void insert(PhoneStock p);
+    void insert(MobileEquipmentIdentity entity);
 
     @Update("update phone_stock set name=#{name}, serialNumber=#{serialNumber}, import=#{isImport}, model=#{model} where id=#{id}")
-    void update(PhoneStock p);
+    void update(MobileEquipmentIdentity entity);
 
     @Delete("delete from phone_stock where id=#{id}")
     void delete(Long id);

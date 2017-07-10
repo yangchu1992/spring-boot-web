@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class PhoneStock {
+public class MobileEquipmentIdentity {
 
     private Long id;
     private String name;
@@ -33,11 +33,11 @@ public class PhoneStock {
     private PhoneStockImportEnum isImport;
     private String model;
 
-    public PhoneStock() {
+    public MobileEquipmentIdentity() {
         super();
     }
 
-    public PhoneStock(String name, String serialNumber, PhoneStockImportEnum isImport, String model) {
+    public MobileEquipmentIdentity(String name, String serialNumber, PhoneStockImportEnum isImport, String model) {
         this();
         this.name = name;
         this.serialNumber = serialNumber;
@@ -89,7 +89,7 @@ public class PhoneStock {
 
     @Override
     public String toString() {
-        return "PhoneStock{" +
+        return "MobileEquipmentIdentity{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
