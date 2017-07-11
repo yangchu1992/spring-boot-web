@@ -34,9 +34,9 @@ public class User {
 
     private Long id;
     @NotNull(message = "用户名不能为空")
-    private String userName;
+    private String username;
     @NotNull(message = "昵称不能为空")
-    private String nickName;
+    private String nickname;
     @NotNull(message = "密码不能为空")
     @Min(value = 6, message = "长度不少于6位")
     private String password;
@@ -47,10 +47,10 @@ public class User {
         this.status = ENABLE;
     }
 
-    public User(String userName, String nickName, String password) {
+    public User(String username, String nickname, String password) {
         this();
-        this.userName = userName;
-        this.nickName = nickName;
+        this.username = username;
+        this.nickname = nickname;
         this.password = password;
     }
 
@@ -62,20 +62,20 @@ public class User {
         this.id = id;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getNickName() {
-        return nickName;
+    public String getNickname() {
+        return nickname;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getPassword() {
@@ -98,8 +98,8 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", userName='" + userName + '\'' +
-                ", nickName='" + nickName + '\'' +
+                ", username='" + username + '\'' +
+                ", nickname='" + nickname + '\'' +
                 ", password='" + password + '\'' +
                 ", status=" + status +
                 '}';

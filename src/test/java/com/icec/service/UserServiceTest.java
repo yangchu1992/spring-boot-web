@@ -1,16 +1,12 @@
-package com.icec.Service;
+package com.icec.service;
 
-import com.icec.mapper.UserMapper;
 import com.icec.modal.User;
-import com.icec.service.UserService;
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by jqChu on 2017/6/28.
@@ -45,6 +41,11 @@ public class UserServiceTest {
         userService.insert(u);
     }
 
+    @Test
+    public void testLogin() throws Exception{
+        User u = userService.login("admin", "123456");
+        System.out.println(u);
+    }
 
 
 }

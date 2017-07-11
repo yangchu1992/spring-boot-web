@@ -1,6 +1,7 @@
 package com.icec.service;
 
 import com.icec.modal.MobileEquipmentIdentity;
+import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
 
@@ -28,6 +29,9 @@ public interface MobileEquipmentIdentityService {
 
     void insert(MobileEquipmentIdentity entity);
 
+
+    void insert(List<MobileEquipmentIdentity> list);
+
     List<MobileEquipmentIdentity> getAll();
 
     MobileEquipmentIdentity find(Long id);
@@ -44,5 +48,11 @@ public interface MobileEquipmentIdentityService {
      * @return
      */
     String querySerialNumber(String serialNumber);
+
+    List<MobileEquipmentIdentity> excelRender(Workbook workbook);
+
+    int batchInsert(Workbook workbook);
+
+
 
 }

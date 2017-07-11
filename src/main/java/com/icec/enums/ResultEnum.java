@@ -23,7 +23,11 @@ package com.icec.enums;
  *
  */
 public enum ResultEnum {
-    UNKNOWN_ERROR(-1,"未知错误"), SUCCESS(0, "成功");
+    UNKNOWN_ERROR(-1,"未知错误"),
+    SUCCESS(0, "成功"),
+    EMPTY_FILE(410, "空文件"),
+    ERROR_FORMAT_FILE(411, "文件格式错误"),
+    IO_EXCEPTION(510, "文件读取时错误");
 
     private Integer code;
 

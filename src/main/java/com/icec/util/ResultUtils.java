@@ -43,4 +43,9 @@ public class ResultUtils {
         result.setMsg(msg);
         return result;
     }
+
+    public static Result error(ResultEnum resultEnum) {
+        return error(resultEnum.getCode(), resultEnum.getMsg());
+    }
+
 }

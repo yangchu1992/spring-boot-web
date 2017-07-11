@@ -33,4 +33,15 @@ public enum PhoneStockImportEnum {
     public String getValue() {
         return value;
     }
+
+    public static PhoneStockImportEnum getByValue(String str) {
+        PhoneStockImportEnum[] values = PhoneStockImportEnum.values();
+        for(PhoneStockImportEnum v : values) {
+            if (v.getValue().equals(str)) {
+                return v;
+            }
+        }
+        return null;
+    }
+
 }

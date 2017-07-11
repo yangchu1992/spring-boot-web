@@ -26,7 +26,6 @@ import java.util.List;
  * 　　┗┓┓┏━┳┓┏┛
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
- *
  */
 @Repository
 public interface MobileEquipmentIdentityMapper {
@@ -39,7 +38,7 @@ public interface MobileEquipmentIdentityMapper {
 
     @Select("select * from phone_stock where id=#{id}")
     @Results({
-             @Result(property = "isImport", column = "import", javaType = PhoneStockImportEnum.class)
+            @Result(property = "isImport", column = "import", javaType = PhoneStockImportEnum.class)
     })
     MobileEquipmentIdentity find(Long id);
 

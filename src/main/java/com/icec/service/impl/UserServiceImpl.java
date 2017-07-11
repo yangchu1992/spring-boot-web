@@ -4,6 +4,7 @@ import com.icec.mapper.UserMapper;
 import com.icec.modal.User;
 import com.icec.service.UserService;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -60,4 +61,17 @@ public class UserServiceImpl implements UserService {
     public void delete(Long id) {
         userMapper.delete(id);
     }
+
+    @Override
+    public User findByName(String username) {
+        return userMapper.findByName(username);
+    }
+
+    @Override
+    public User login(String username, String password) {
+
+        return null;
+    }
+
+
 }

@@ -65,7 +65,7 @@ public class ApiController {
     @RequestMapping(value="/{id}", method=RequestMethod.PUT)
     public String putUser(@PathVariable Long id, @RequestBody User user) {
         User u = users.get(id);
-        u.setUserName(user.getUserName());
+        u.setUsername(user.getUsername());
         users.put(id, u);
         return "success";
     }

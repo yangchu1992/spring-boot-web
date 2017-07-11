@@ -1,17 +1,15 @@
 package com.icec.controller;
 
 import com.github.pagehelper.PageHelper;
-import com.icec.enums.ResultEnum;
 import com.icec.modal.Result;
 import com.icec.modal.User;
-import com.icec.service.impl.UserServiceImpl;
+import com.icec.service.UserService;
 import com.icec.util.ResultUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.validation.Valid;
-import java.util.List;
 
 /**
  * Created by jqChu on 2017/6/17.
@@ -39,16 +37,16 @@ import java.util.List;
 public class UserController {
 
     @Resource
-    private UserServiceImpl userService;
+    private UserService userService;
 
     @GetMapping(value = "/user/list")
-    public Result<List> getList() {
+    public Result getList() {
         PageHelper.startPage(1, 3);
         return ResultUtils.success(userService.getAll());
     }
 
     @PostMapping(value = "/user")
-    public Result<User> postUser(@Valid User u, BindingResult bindingResult) {
+    public Result postUser(@Valid User u, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -57,7 +55,7 @@ public class UserController {
     }
 
     @PutMapping(value = "/user")
-    public Result<User> putUser(@Valid User u, BindingResult bindingResult) {
+    public Result putUser(@Valid User u, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }

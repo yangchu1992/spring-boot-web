@@ -28,28 +28,36 @@ import java.util.List;
  * 　　　┗┻┛　┗┻┛
  */
 @Repository
-public interface UserMapper{
+public interface UserMapper {
 
     @Select("select * from user")
     @Results({
-            @Result(property = "userName", column = "username"),
-            @Result(property = "nickName", column = "nickname"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "nickname", column = "nickname"),
             @Result(property = "status", column = "status", javaType = UserStatusEnum.class)
     })
     List<User> getAll();
 
     @Select("select * from user where id=#{id}")
     @Results({
-            @Result(property = "userName", column = "username"),
-            @Result(property = "nickName", column = "nickname"),
+            @Result(property = "username", column = "username"),
+            @Result(property = "nickname", column = "nickname"),
             @Result(property = "status", column = "status", javaType = UserStatusEnum.class)
     })
     User find(Long id);
 
-    @Insert("insert into user(userName, nickName, password, status) values (#{userName},#{nickName},#{password}, #{status})")
+    @Select("select * from user where username=#{username}")
+    @Results({
+            @Result(property = "username", column = "username"),
+            @Result(property = "nickname", column = "nickname"),
+            @Result(property = "status", column = "status", javaType = UserStatusEnum.class)
+    })
+    User findByName(String username);
+
+    @Insert("insert into user(username, nickname, password, status) values (#{username}, #{nickname}, #{password}, #{status})")
     void insert(User user);
 
-    @Update("update user set userName=#{userName},nickName=#{nickName} where id=#{id}")
+    @Update("update user set username=#{username},nickName=#{nickname} where id=#{id}")
     void update(User user);
 
     @Delete("delete from user where id=#{id}")
