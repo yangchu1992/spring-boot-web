@@ -1,10 +1,11 @@
 package com.icec.controller;
 
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import com.icec.modal.MobileEquipmentIdentity;
+import com.icec.modal.ImeiInfo;
 import com.icec.modal.Result;
-import com.icec.service.MobileEquipmentIdentityService;
-import com.icec.service.impl.MobileEquipmentIdentityServiceImpl;
+import com.icec.service.ImeiInfoService;
+import com.icec.service.impl.ImeiInfoServiceImpl;
 import com.icec.util.ResultUtils;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,7 +21,9 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.annotation.Resource;
 import javax.validation.Valid;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static com.icec.enums.ResultEnum.EMPTY_FILE;
 import static com.icec.enums.ResultEnum.ERROR_FORMAT_FILE;
@@ -51,53 +54,56 @@ import static com.icec.enums.ResultEnum.IO_EXCEPTION;
  */
 @CrossOrigin
 @RestController
-@RequestMapping("/user")
 @Api(value = "手机IMEI导入信息")
-public class MobileEquipmentIdentityController {
+public class ImeiInfoController {
 
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(MobileEquipmentIdentityController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(ImeiInfoController.class);
 
     @Resource
-    private MobileEquipmentIdentityService mobileEquipmentIdentityService;
+    private ImeiInfoService imeiInfoService;
 
     @ApiOperation(value="获取手机IMEI信息列表")
-    @GetMapping(value = "/mobile-equipment-identity/list")
+    @GetMapping(value = "/imei/list")
     public Result<List> getList(@RequestParam(value = "pageNum", defaultValue = "1") int pageNum, @RequestParam(value = "pageSize", defaultValue = "100") int pageSize) {
-        PageHelper.startPage(pageNum, pageSize);
-        return ResultUtils.success(mobileEquipmentIdentityService.getAll());
+        Page<Object> page = PageHelper.startPage(pageNum, pageSize);
+        imeiInfoService.getAll();
+        Map map = new HashMap<>();
+        map.put("list", page);
+        map.put("total", page.getTotal());
+        return ResultUtils.success(map);
     }
 
 
     @ApiOperation(value="创建手机IMEI信息", notes="")
-    @PostMapping(value = "/mobile-equipment-identity")
-    public Result postUser(@Valid MobileEquipmentIdentity m, BindingResult bindingResult) {
+    @PostMapping(value = "/imei")
+    public Result postUser(@Valid ImeiInfo m, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
-        mobileEquipmentIdentityService.insert(m);
+        imeiInfoService.insert(m);
         return ResultUtils.success(m);
     }
 
     @ApiOperation(value = "更新单个记录", notes = "更新手机IMEI信息")
-    @PutMapping(value = "/mobile-equipment-identity")
-    public Result putIdentity(@Valid MobileEquipmentIdentity m, BindingResult bindingResult) {
+    @PutMapping(value = "/imei")
+    public Result putIdentity(@Valid ImeiInfo m, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
-        mobileEquipmentIdentityService.update(m);
+        imeiInfoService.update(m);
         return ResultUtils.success(m);
     }
 
     @ApiOperation(value = "删除单个记录", notes = "根据url删除手机IMEI")
-    @DeleteMapping(value = "/mobile-equipment-identity/{id}")
+    @DeleteMapping(value = "/imei/{id}")
     public Result deleteIdentity(@PathVariable Long id){
-        mobileEquipmentIdentityService.delete(id);
+        imeiInfoService.delete(id);
         return ResultUtils.success();
     }
 
 
-    @PostMapping(value = "/mobile-equipment-identity/excel")
+    @PostMapping(value = "/imei/excel")
     public Result postExcel(@RequestParam("upload") MultipartFile file) {
         if (file.isEmpty()) {
             return ResultUtils.error(EMPTY_FILE);
@@ -114,7 +120,7 @@ public class MobileEquipmentIdentityController {
             } else {
                 return ResultUtils.error(ERROR_FORMAT_FILE);
             }
-            return ResultUtils.success(mobileEquipmentIdentityService.batchInsert(workbook));
+            return ResultUtils.success(imeiInfoService.batchInsert(workbook));
         } catch (IOException e) {
             return ResultUtils.error(IO_EXCEPTION);
         }

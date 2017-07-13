@@ -1,9 +1,10 @@
 package com.icec.service;
 
-import com.icec.modal.MobileEquipmentIdentity;
+import com.icec.modal.ImeiInfo;
 import org.apache.poi.ss.usermodel.Workbook;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jqChu on 2017/6/17.
@@ -25,20 +26,20 @@ import java.util.List;
  * 　　　┃┫┫　┃┫┫
  * 　　　┗┻┛　┗┻┛
  */
-public interface MobileEquipmentIdentityService {
+public interface ImeiInfoService {
 
-    void insert(MobileEquipmentIdentity entity);
+    void insert(ImeiInfo entity);
 
 
-    void insert(List<MobileEquipmentIdentity> list);
+    void insert(List<ImeiInfo> list);
 
-    List<MobileEquipmentIdentity> getAll();
+    List<ImeiInfo> getAll();
 
-    MobileEquipmentIdentity find(Long id);
+    ImeiInfo find(Long id);
 
-    MobileEquipmentIdentity findBySerialNumber(String serialNumber);
+    ImeiInfo findBySerialNumber(String serialNumber);
 
-    void update(MobileEquipmentIdentity entity);
+    void update(ImeiInfo entity);
 
     void delete(Long id);
 
@@ -49,9 +50,11 @@ public interface MobileEquipmentIdentityService {
      */
     String querySerialNumber(String serialNumber);
 
-    List<MobileEquipmentIdentity> excelRender(Workbook workbook);
+    List<ImeiInfo> excelRender(Workbook workbook);
 
     int batchInsert(Workbook workbook);
+
+    Map<String, ImeiInfo> getMapBySerialNumber();
 
 
 

@@ -1,6 +1,6 @@
 package com.icec.modal;
 
-import com.icec.enums.PhoneStockImportEnum;
+import com.icec.enums.ImeiImportEnum;
 import org.springframework.stereotype.Component;
 
 /**
@@ -25,26 +25,29 @@ import org.springframework.stereotype.Component;
  *
  */
 @Component
-public class MobileEquipmentIdentity {
+public class ImeiInfo {
 
     private Long id;
     private String name;
     private String serialNumber;
-    private PhoneStockImportEnum isImport;
+    private ImeiImportEnum isImport;
     private String model;
 
-    public MobileEquipmentIdentity() {
+ 
+
+    private String mobileType;
+
+    public ImeiInfo() {
         super();
     }
 
-    public MobileEquipmentIdentity(String name, String serialNumber, PhoneStockImportEnum isImport, String model) {
-        this();
+    public ImeiInfo(String name, String serialNumber, ImeiImportEnum isImport, String model, String mobileType) {
         this.name = name;
         this.serialNumber = serialNumber;
         this.isImport = isImport;
         this.model = model;
+        this.mobileType = mobileType;
     }
-
 
     public Long getId() {
         return id;
@@ -70,11 +73,11 @@ public class MobileEquipmentIdentity {
         this.serialNumber = serialNumber;
     }
 
-    public PhoneStockImportEnum getIsImport() {
+    public ImeiImportEnum getIsImport() {
         return isImport;
     }
 
-    public void setIsImport(PhoneStockImportEnum isImport) {
+    public void setIsImport(ImeiImportEnum isImport) {
         this.isImport = isImport;
     }
 
@@ -85,16 +88,24 @@ public class MobileEquipmentIdentity {
     public void setModel(String model) {
         this.model = model;
     }
+   
+    public String getMobileType() {
+        return mobileType;
+    }
 
+    public void setMobileType(String mobileType) {
+        this.mobileType = mobileType;
+    }
 
     @Override
     public String toString() {
-        return "MobileEquipmentIdentity{" +
+        return "ImeiInfo{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", serialNumber='" + serialNumber + '\'' +
                 ", isImport=" + isImport +
                 ", model='" + model + '\'' +
+                ", mobileType='" + mobileType + '\'' +
                 '}';
     }
 }

@@ -21,12 +21,12 @@ package com.icec.enums;
  * 　　　┗┻┛　┗┻┛
  *
  */
-public enum PhoneStockImportEnum {
+public enum ImeiImportEnum {
     UNABLE("不能导入"), DONE("已导入"), UNDONE("未导入");
 
     private final String value;
 
-    PhoneStockImportEnum(String value) {
+    ImeiImportEnum(String value) {
         this.value = value;
     }
 
@@ -34,9 +34,9 @@ public enum PhoneStockImportEnum {
         return value;
     }
 
-    public static PhoneStockImportEnum getByValue(String str) {
-        PhoneStockImportEnum[] values = PhoneStockImportEnum.values();
-        for(PhoneStockImportEnum v : values) {
+    public static ImeiImportEnum getByValue(String str) {
+        ImeiImportEnum[] values = ImeiImportEnum.values();
+        for(ImeiImportEnum v : values) {
             if (v.getValue().equals(str)) {
                 return v;
             }

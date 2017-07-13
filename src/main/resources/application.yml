@@ -1,7 +1,7 @@
 #指定项目的运行环境,可自动启用或停止某些功能
 spring:
   profiles:
-    active: dev
+    active: prod
 
 http:
     encoding:
@@ -12,7 +12,7 @@ http:
 
 #tomcat config
 server:
-  port: 8080
+  port: 80
   session:
     timeout: 30
 
