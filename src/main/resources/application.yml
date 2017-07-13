@@ -12,7 +12,7 @@ http:
 
 #tomcat config
 server:
-  port: 80
+  port: 8080
   session:
     timeout: 30
 
