@@ -1,7 +1,7 @@
 #指定项目的运行环境,可自动启用或停止某些功能
 spring:
   profiles:
-    active: prod
+    active: dev
 
 http:
     encoding:

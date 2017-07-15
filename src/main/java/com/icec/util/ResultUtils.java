@@ -44,8 +44,4 @@ public class ResultUtils {
         return result;
     }
 
-    public static Result error(ResultEnum resultEnum) {
-        return error(resultEnum.getCode(), resultEnum.getMsg());
-    }
-
 }

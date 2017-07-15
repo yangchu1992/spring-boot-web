@@ -5,8 +5,8 @@ import com.github.pagehelper.PageHelper;
 import com.icec.modal.ImeiInfo;
 import com.icec.modal.Result;
 import com.icec.service.ImeiInfoService;
-import com.icec.service.impl.ImeiInfoServiceImpl;
 import com.icec.util.ResultUtils;
+import com.icec.util.StringUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -75,9 +75,15 @@ public class ImeiInfoController {
     }
 
 
+    @GetMapping(value = "/imei")
+    public Result getImei(@RequestParam String serialNumber) {
+        return ResultUtils.success(imeiInfoService.querySerialNumber(serialNumber));
+    }
+
+
     @ApiOperation(value="创建手机IMEI信息", notes="")
     @PostMapping(value = "/imei")
-    public Result postUser(@Valid ImeiInfo m, BindingResult bindingResult) {
+    public Result postImei(@Valid ImeiInfo m, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -87,7 +93,7 @@ public class ImeiInfoController {
 
     @ApiOperation(value = "更新单个记录", notes = "更新手机IMEI信息")
     @PutMapping(value = "/imei")
-    public Result putIdentity(@Valid ImeiInfo m, BindingResult bindingResult) {
+    public Result putImei(@Valid ImeiInfo m, BindingResult bindingResult) {
         if(bindingResult.hasErrors()) {
             return ResultUtils.error(100, bindingResult.getFieldError().getDefaultMessage());
         }
@@ -96,17 +102,27 @@ public class ImeiInfoController {
     }
 
     @ApiOperation(value = "删除单个记录", notes = "根据url删除手机IMEI")
-    @DeleteMapping(value = "/imei/{id}")
-    public Result deleteIdentity(@PathVariable Long id){
+    @DeleteMapping(value = "/imei")
+    public Result deleteImei(@RequestParam Long id){
         imeiInfoService.delete(id);
         return ResultUtils.success();
     }
 
+    @ApiOperation(value = "删除多条记录", notes = "根据url删除手机IMEI")
+    @DeleteMapping(value = "/imei/batch")
+    public Result deleteImei(@RequestParam String ids) {
+        List<String> list = StringUtil.str2Array(ids, ",");
+        list.forEach((s)-> {
+            imeiInfoService.delete(Long.valueOf(s));
+        });
+        return ResultUtils.success();
+    }
 
-    @PostMapping(value = "/imei/excel")
+
+    @PostMapping(value = "/imei/batch")
     public Result postExcel(@RequestParam("upload") MultipartFile file) {
         if (file.isEmpty()) {
-            return ResultUtils.error(EMPTY_FILE);
+            return ResultUtils.error(EMPTY_FILE.getCode(), EMPTY_FILE.getMsg());
         }
 
         String filename = file.getOriginalFilename();
@@ -118,11 +134,11 @@ public class ImeiInfoController {
             } else if (filename.endsWith(".xlsx")) {
                 workbook = new XSSFWorkbook(file.getInputStream());
             } else {
-                return ResultUtils.error(ERROR_FORMAT_FILE);
+                return ResultUtils.error(ERROR_FORMAT_FILE.getCode(), ERROR_FORMAT_FILE.getMsg());
             }
             return ResultUtils.success(imeiInfoService.batchInsert(workbook));
         } catch (IOException e) {
-            return ResultUtils.error(IO_EXCEPTION);
+            return ResultUtils.error(IO_EXCEPTION.getCode(), IO_EXCEPTION.getMsg());
         }
     }
 
